@@ -3,12 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        #from{
+            margin-left: 74px;
+        }
+        #y_password{
+            margin-left: 13px;
+        }
+        #repeat_password{
+
+        }
+
+        input{
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        #select{
+            margin-left: 93px;
+            width: 165px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        #text_area{
+            width:273px;
+            height: 100px;
+        }
+
+        .error{
+            color: firebrick;
+        }
+
+    </style>
 </head>
 <body>
 <form action="#" name="MyForm">
     <input type="text" class="text_input" name="text_area">
     <input type="submit" value="Print" name="print">
     <input type="reset">
+</form>
+<br>
+<br>
+<form action="#" method="get" name="Validate_Form">
+    <label>
+        From
+        <input type="text" name="from" id="from">
+        <span class="error" id="error_from"></span>
+    </label>
+    <br>
+    <label>
+        Your password
+        <input type="password" name="your_password" id="y_password">
+        <span class="error" id="error_password"></span>
+    </label>
+    <br>
+    <label>
+        Repeat password
+        <input type="password" name="repeat_password" id="repeat_password">
+        <span class="error" id="error_repeat_password"></span>
+    </label>
+    <br>
+    <label>
+        To
+        <select name="select" id="select">
+            <option value="Purchase_department">Purchase department</option>
+            <option value="other">Other</option>
+        </select>
+    </label>
+    <br>
+    <label>
+        Message
+        <br>
+        <textarea name="text_area" id="text_area"></textarea>
+        <br>
+        <span class="error" id="error_message"></span>
+    </label>
+    <br>
 </form>
 
 <script>
@@ -24,6 +95,65 @@
         event.preventDefault();
     }
 
+    //2
+    let from=document.Validate_Form.from;
+    let password=document.Validate_Form.your_password;
+    let repeat_pass=document.Validate_Form.repeat_password;
+    let message = document.Validate_Form.text_area;
+
+    from.addEventListener('blur', ()=>{
+        event.preventDefault();
+        if(from.value.length<=0){
+            from.style.border='2px inset firebrick';
+            document.querySelector('#error_from').innerText='Fill the field!';
+        }
+        else{
+            document.querySelector('#error_from').innerText='';
+            from.style.border='2px inset lightgrey';
+        }
+    });
+
+    password.addEventListener('blur', ()=>{
+        event.preventDefault();
+        if(password.value.length<=0){
+            password.style.border='2px inset firebrick';
+            document.querySelector('#error_password').innerText='Enter a password!';
+        }
+        else{
+            document.querySelector('#error_password').innerText='';
+            password.style.border='2px inset lightgrey';
+        }
+    });
+
+    repeat_pass.addEventListener('blur', ()=>{
+        event.preventDefault();
+        if(repeat_pass.value.length<=0){
+            repeat_pass.style.border='2px inset firebrick';
+            document.querySelector('#error_repeat_password').innerText='Repeat a password!';
+        }
+        else{
+
+           if(repeat_pass.value!=password.value){
+               repeat_pass.style.border='2px inset firebrick';
+               document.querySelector('#error_repeat_password').innerText='Passwords are different!';
+           }else{
+               document.querySelector('#error_repeat_password').innerText='';
+               repeat_pass.style.border='2px inset lightgrey';
+           }
+        }
+    });
+
+    message.addEventListener('blur', ()=>{
+        event.preventDefault();
+        if(message.value.length<=0){
+            message.style.border='2px inset firebrick';
+            document.querySelector('#error_message').innerText='Enter a message!';
+        }
+        else{
+            document.querySelector('#error_message').innerText='';
+            message.style.border='2px inset lightgrey';
+        }
+    });
 
 </script>
 </body>
