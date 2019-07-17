@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" name="MyForm">
+    <input type="text" class="text_input" name="text_area">
+    <input type="submit" value="Print" name="print">
+    <input type="reset">
+</form>
+
+<script>
+    let form=document.forms['MyForms'];
+    let text_area=document.MyForm.text_area;
+    let print=document.MyForm.print;
+
+    print.onclick=function (event) {
+        let node=document.createElement('p');
+        node.textContent=text_area.value;
+        node.style.fontSize='18px';
+        document.body.appendChild(node);
+        event.preventDefault();
+    }
+
+
+</script>
+</body>
+</html>
